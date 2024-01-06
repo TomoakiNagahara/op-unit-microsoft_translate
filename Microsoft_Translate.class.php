@@ -34,4 +34,31 @@ class Microsoft_Translate implements IF_UNIT
 	 *
 	 */
 	use OP_CORE, OP_CI;
+
+	/** Microsoft Translate Language List.
+	 *
+	 */
+	static function LanguageList() : array
+	{
+		//	...
+		$key = __FILE__;
+		$key = md5($key);
+		$key = substr($key, 0, 10);
+
+		//	...
+		if(!$json = apcu_fetch($key) ){
+			$json = `curl -sS "https://api.cognitive.microsofttranslator.com/languages?api-version=3.0&scope=translation"`;
+
+			//	...
+			apcu_store($key, $json);
+
+			//	...
+		//	D('fetched');
+		}else{
+		//	D('stored');
+		}
+
+		//	...
+		return json_decode($json, true)['translation'];
+	}
 }
