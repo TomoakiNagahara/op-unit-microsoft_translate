@@ -1,7 +1,7 @@
 <?php
-/** op-unit-microsoft_translate:/config.php
+/** op-unit-microsoft_translate:/testcase/Config.php
  *
- * @created    2024-01-06
+ * @created    2024-01-07
  * @version    1.0
  * @package    op-unit-microsoft_translate
  * @author     Tomoaki Nagahara <tomoaki.nagahara@gmail.com>
@@ -16,18 +16,11 @@ declare(strict_types=1);
 /** namespace
  *
  */
-namespace OP\UNIT;
+namespace OP\UNIT\Microsoft_Translate;
 
 /** use
  *
  */
 
 //	...
-$config = [
-	//	Microsoft Translator API v3
-	'Ocp-Apim-Subscription-Key' => null,
-	'region' => 'japaneast',
-];
-
-//	...
-return $config;
+D( OP()->Config('microsoft_translate') );
