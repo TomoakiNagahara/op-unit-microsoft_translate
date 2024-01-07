@@ -111,4 +111,24 @@ class Microsoft_Translate implements IF_UNIT
 		//	...
 		return $json;
 	}
+
+	/** Get internal errors.
+	 *
+	 * @param string $message
+	 * @return string
+	 */
+	static function Errors(?string $message=null)
+	{
+		//	...
+		static $_messages = [];
+
+		//	...
+		if( $message ){
+			$_messages[] = $message;
+			return;
+		}
+
+		//	...
+		return array_shift($_messages);
+	}
 }
