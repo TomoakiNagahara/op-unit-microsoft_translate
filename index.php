@@ -24,3 +24,11 @@ namespace OP\UNIT;
 
 //	...
 include('Microsoft_Translate.class.php');
+
+//	...
+register_shutdown_function(function(){
+	//	...
+	while( $error = OP()->Unit('Microsoft_Translate')->Errors() ){
+		OP()->Notice($error);
+	}
+});
