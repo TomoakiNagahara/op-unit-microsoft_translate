@@ -37,11 +37,12 @@ class Microsoft_Translate implements IF_UNIT
 
 	/** Microsoft Translate Language List.
 	 *
+	 * @return array
 	 */
 	static function LanguageList() : array
 	{
 		//	...
-		$key = __FILE__;
+		$key = __FILE__.__LINE__;
 		$key = md5($key);
 		$key = substr($key, 0, 10);
 
