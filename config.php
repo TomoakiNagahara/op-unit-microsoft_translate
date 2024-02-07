@@ -26,7 +26,9 @@ namespace OP\UNIT;
 $config = [
 	//	Microsoft Translator API v3
 	'Ocp-Apim-Subscription-Key' => null,
-	'region' => 'japaneast',
+	'region'   => 'japaneast',
+	'cache'    => 'apcu', // false, file, apcu, memcache, database
+	'database' => 'sqlite://user_name:password@localhost/database_name/table_name',
 ];
 
 //	...
