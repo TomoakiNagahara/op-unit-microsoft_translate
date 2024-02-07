@@ -22,5 +22,8 @@ namespace OP\UNIT\Microsoft_Translate;
  *
  */
 
+$config = OP()->Config('microsoft_translate');
+$config['Ocp-Apim-Subscription-Key'] = 'hidden';
+
 //	...
-D( OP()->Config('microsoft_translate') );
+D( $config );
