@@ -129,10 +129,18 @@ class Microsoft_Translate implements IF_UNIT
 
 	/** Get internal errors.
 	 *
+	 * <pre>
+	 * //  Set
+	 * self::Errors('Error message.');
+	 *
+	 * //  Get
+	 * $error_message = self::Errors();
+	 * </pre>
+	 *
 	 * @param string $message
 	 * @return string
 	 */
-	static function Errors(?string $message=null)
+	static function Errors(?string $message=null) : string
 	{
 		//	...
 		static $_messages = [];
@@ -140,7 +148,7 @@ class Microsoft_Translate implements IF_UNIT
 		//	...
 		if( $message ){
 			$_messages[] = $message;
-			return;
+			return '';
 		}
 
 		//	...
