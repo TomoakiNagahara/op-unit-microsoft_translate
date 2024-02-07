@@ -71,8 +71,17 @@ class Microsoft_Translate implements IF_UNIT
 	 * @param   string      $from_lang
 	 * @return  void|string
 	 */
-	static function Fetch(array $strings, string $to_lang, string $from_lang=null)
+	static function Fetch(array $strings, string $to_lang, string $from_lang='') : string
 	{
+		//	Cache
+		$cache_key = json_encode($strings) . ", $to_lang, $from_lang";
+		$cache_key = md5($cache_key);
+		$cache_key = substr($cache_key, 0, 10);
+		if( $json  = apcu_fetch($cache_key) ){
+			D('Hit apcu!');
+			return $json;
+		}
+
 		//	...
 		$config = OP()->Config('microsoft_translate');
 		$region = $config['region'] ?? null;
@@ -81,7 +90,7 @@ class Microsoft_Translate implements IF_UNIT
 		//	Secret API key
 		if(!$apikey ){
 			self::Errors("Config('Ocp-Apim-Subscription-Key') is empty.");
-			return;
+			return [];
 		}
 
 		//	Text format
@@ -102,15 +111,20 @@ class Microsoft_Translate implements IF_UNIT
 		}
 		$text = join(',', $text);
 
-		//	...
+		//	Fetch translation strings.
 		$json = `curl -X POST "https://api.cognitive.microsofttranslator.com/translate?{$query}" \
 		-H "Ocp-Apim-Subscription-Region: {$region}" \
 		-H "Ocp-Apim-Subscription-Key: {$apikey}" \
 		-H "Content-Type: application/json; charset=UTF-8" \
 		-d "[{$text}]"`;
 
-		//	...
-		return $json;
+		//	Save to cache.
+		if( $json ){
+			apcu_store($cache_key, $json);
+		}
+
+		//	Return result json.
+		return $json ?? '';
 	}
 
 	/** Get internal errors.
