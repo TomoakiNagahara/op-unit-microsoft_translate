@@ -152,6 +152,6 @@ class Microsoft_Translate implements IF_UNIT
 		}
 
 		//	...
-		return array_shift($_messages);
+		return array_shift($_messages) ?? '';
 	}
 }
