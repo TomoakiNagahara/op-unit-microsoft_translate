@@ -112,7 +112,7 @@ class Microsoft_Translate implements IF_UNIT
 		$text = join(',', $text);
 
 		//	Fetch translation strings.
-		$json = `curl -X POST "https://api.cognitive.microsofttranslator.com/translate?{$query}" \
+		$json = `curl --silent -X POST "https://api.cognitive.microsofttranslator.com/translate?{$query}" \
 		-H "Ocp-Apim-Subscription-Region: {$region}" \
 		-H "Ocp-Apim-Subscription-Key: {$apikey}" \
 		-H "Content-Type: application/json; charset=UTF-8" \
