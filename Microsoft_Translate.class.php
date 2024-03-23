@@ -154,4 +154,26 @@ class Microsoft_Translate implements IF_UNIT
 		//	...
 		return array_shift($_messages) ?? '';
 	}
+
+	/** Cache
+	 *
+	 * @param  string $cache_key
+	 * @param  string $cache_value
+	 * @return string
+	 */
+	static function _Cache(string $cache_key, string $cache_value=null) : ?string
+	{
+		//	...
+		if(!$cache_type = OP()->Config('microsoft_translate')['cache'] ?? null ){
+			return null;
+		}
+
+		//	...
+		if(!OP()->Unit()->isInstalled('Cache') ){
+			return null;
+		}
+
+		//	...
+		return OP()->Unit('Cache')->{$cache_type}($cache_key, $cache_value);
+	}
 }
